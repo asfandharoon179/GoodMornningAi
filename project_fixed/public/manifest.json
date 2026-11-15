@@ -1,0 +1,25 @@
+{
+  "id": "/",
+  "name": "Good Morning AI",
+  "short_name": "Morning AI",
+  "description": "Create and share uplifting morning greetings and greeting cards.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fdfcf0",
+  "theme_color": "#f2994a",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

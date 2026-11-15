@@ -1,0 +1,38 @@
+{
+  "name": "goodmorning-ai",
+  "version": "1.0.0",
+  "description": "AI-generated morning greetings and shareable greeting cards",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "greetings",
+    "ai",
+    "pwa"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@napi-rs/canvas": "^0.1.100",
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.10.0",
+    "cors": "^2.8.6",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "helmet": "^8.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.5.0",
+    "nodemailer": "^10.5.0",
+    "node-cron": "^4.2.1",
+    "pino": "^9.7.0",
+    "web-push": "^3.6.7",
+    "zod": "^4.6.7"
+  }
+}

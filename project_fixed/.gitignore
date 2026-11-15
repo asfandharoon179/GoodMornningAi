@@ -1,0 +1,25 @@
+# ── Secrets — NEVER commit these ──────────────────────
+.env
+.env.*
+!.env.example
+
+# Local data/configuration
+db_backup.json
+
+# ── Logs ──────────────────────────────────────────────
+server.log
+*.log
+logs/
+
+# ── WhatsApp session / cache ───────────────────────────
+.wwebjs_auth/
+.wwebjs_cache/
+
+# ── Node ──────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# ── OS ────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

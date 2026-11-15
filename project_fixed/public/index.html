@@ -1,0 +1,2503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Good Morning AI </title>
+  <meta name="theme-color" content="#f2994a" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/icon.png" type="image/png" />
+  <meta name="description" content="Start your day with inspiration. Good Morning AI lets you generate personalized morning messages and greeting cards in English, Urdu, Arabic, Hindi, and more." />
+  <meta name="keywords" content="Good Morning, AI, Quotes, Greetings, Greeting Cards, Islamic, Motivational, Daily Blessing" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Good Morning AI " />
+  <meta property="og:description" content="Start your day with inspiration. Generate personalized morning messages and greeting cards in multiple languages." />
+  <meta property="og:image" content="/icon.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="Good Morning AI " />
+  <meta property="twitter:description" content="Start your day with inspiration. Generate personalized morning messages and greeting cards in multiple languages." />
+  <meta property="twitter:image" content="/icon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#904d00",
+            "on-primary": "#ffffff",
+            "primary-container": "#f2994a",
+            "on-primary-container": "#663500",
+            "primary-fixed": "#ffdcc3",
+            "primary-fixed-dim": "#ffb77d",
+            "secondary": "#745b00",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#fdd355",
+            "on-secondary-container": "#735a00",
+            "tertiary": "#006780",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#40bbe0",
+            "on-tertiary-container": "#00485a",
+            "surface": "#fbf9f8",
+            "surface-dim": "#dcd9d9",
+            "surface-bright": "#fbf9f8",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f6f3f2",
+            "surface-container": "#f0eded",
+            "surface-container-high": "#eae8e7",
+            "surface-container-highest": "#e4e2e1",
+            "on-surface": "#1b1c1c",
+            "on-surface-variant": "#544438",
+            "outline": "#867366",
+            "outline-variant": "#d9c2b3",
+            "background": "#fbf9f8",
+            "on-background": "#1b1c1c",
+            "warm-white": "#FDFCF0",
+            "success-green": "#27AE60",
+            "whatsapp-brand": "#25D366",
+            "error": "#ba1a1a",
+            "inverse-surface": "#303030",
+            "inverse-on-surface": "#f3f0f0",
+            "inverse-primary": "#ffb77d",
+          },
+          fontFamily: {
+            "sans": ["Be Vietnam Pro", "sans-serif"],
+          },
+          borderRadius: {
+            "xl": "1rem",
+            "2xl": "1.5rem",
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- ── DARK MODE: apply saved/system theme BEFORE render to avoid flash ── -->
+  <script>
+    (function () {
+      const saved = localStorage.getItem('gm_theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+      document.documentElement.classList.add(theme);
+
+      // Follow OS changes only if user hasn't manually set a preference
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+        if (!localStorage.getItem('gm_theme')) {
+          document.documentElement.classList.remove('dark', 'light');
+          document.documentElement.classList.add(e.matches ? 'dark' : 'light');
+          if (typeof updateDarkModeButton === 'function') updateDarkModeButton();
+        }
+      });
+    })();
+  </script>
+
+  <style>
+
+    * {
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .fill-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .sunrise-gradient {
+      background: linear-gradient(135deg, #f2994a 0%, #fdd355 100%);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(51, 51, 51, 0.05);
+      box-shadow: 0 4px 12px rgba(51, 51, 51, 0.08);
+    }
+
+    .ambient-shadow {
+      box-shadow: 0 4px 12px rgba(51, 51, 51, 0.08);
+    }
+
+    .urdu-text {
+      font-family: 'Noto Nastaliq Urdu', serif;
+      direction: rtl;
+    }
+
+    /* Page routing */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* Nav active state */
+    .nav-item {
+      transition: all 0.2s;
+    }
+
+    .nav-item.active {
+      background: #fdd355;
+      color: #735a00;
+      border-radius: 0.75rem;
+    }
+
+    /* Toast */
+    #toast {
+      transition: opacity 0.3s, transform 0.3s;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Streaming cursor blink */
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0
+      }
+    }
+
+    .cursor-blink::after {
+      content: '|';
+      animation: blink 1s infinite;
+      color: #904d00;
+    }
+
+    /* Spinner */
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .spinner {
+      animation: spin 1s linear infinite;
+    }
+
+    /* Loader dots */
+    @keyframes bounce {
+
+      0%,
+      80%,
+      100% {
+        transform: scale(0)
+      }
+
+      40% {
+        transform: scale(1)
+      }
+    }
+
+    .dot1 {
+      animation: bounce 1.2s infinite ease-in-out;
+      animation-delay: -0.32s
+    }
+
+    .dot2 {
+      animation: bounce 1.2s infinite ease-in-out;
+      animation-delay: -0.16s
+    }
+
+    .dot3 {
+      animation: bounce 1.2s infinite ease-in-out
+    }
+
+    /* Toggle */
+    .toggle-checkbox:checked {
+      right: 0;
+      border-color: #904d00;
+    }
+
+    .toggle-checkbox:checked+.toggle-label {
+      background-color: #f2994a;
+    }
+
+    .toggle-checkbox {
+      right: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    /* Image card fade in */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.97)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1)
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.4s ease;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f6f3f2;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #d9c2b3;
+      border-radius: 4px;
+    }
+
+    /* ── LIGHT MODE (default) ── */
+    body {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    /* ── DARK MODE OVERRIDES ── */
+    html.dark body {
+      background-color: #121212;
+      color: #e4e2e1;
+    }
+
+    html.dark .glass-card {
+      background: rgba(30, 30, 30, 0.95);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    html.dark .ambient-shadow {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    html.dark header {
+      background-color: #1a1a1a !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    html.dark nav {
+      background-color: #1a1a1a !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    html.dark .bg-white {
+      background-color: #1e1e1e !important;
+    }
+
+    html.dark .bg-warm-white {
+      background-color: #121212 !important;
+    }
+
+    html.dark .bg-surface-container-low {
+      background-color: #2a2a2a !important;
+    }
+
+    html.dark .bg-surface-container-highest {
+      background-color: #2e2e2e !important;
+    }
+
+    html.dark .bg-inverse-surface {
+      background-color: #2e2e2e !important;
+    }
+
+    html.dark select {
+      background-color: #1e1e1e !important;
+      color: #e4e2e1 !important;
+      border-color: rgba(255, 255, 255, 0.15) !important;
+    }
+
+    html.dark input[type="time"] {
+      background-color: #1e1e1e !important;
+      color: #f2994a !important;
+      border-color: #f2994a !important;
+    }
+
+    html.dark input[type="text"],
+    html.dark input[type="email"],
+    html.dark input[type="password"] {
+      background-color: #2a2a2a !important;
+      color: #e4e2e1 !important;
+      border-color: rgba(255, 255, 255, 0.12) !important;
+    }
+
+    html.dark .text-on-surface {
+      color: #e4e2e1 !important;
+    }
+
+    html.dark .text-on-surface-variant {
+      color: #a09080 !important;
+    }
+
+    html.dark .text-\[\#333333\] {
+      color: #e4e2e1 !important;
+    }
+
+    html.dark .border-black\/5 {
+      border-color: rgba(255, 255, 255, 0.07) !important;
+    }
+
+    html.dark .bg-secondary-container\/30 {
+      background-color: rgba(253, 211, 85, 0.1) !important;
+    }
+
+    html.dark .bg-tertiary-container\/10 {
+      background-color: rgba(64, 187, 224, 0.08) !important;
+    }
+
+    /* Modal backgrounds in dark mode */
+    html.dark .bg-white.rounded-3xl,
+    html.dark .bg-white.rounded-2xl {
+      background-color: #1e1e1e !important;
+    }
+
+    html.dark ::-webkit-scrollbar-track {
+      background: #1e1e1e;
+    }
+
+    html.dark ::-webkit-scrollbar-thumb {
+      background: #444;
+    }
+
+    /* Theme toggle button rotation animation */
+    #theme-toggle-btn .material-symbols-outlined {
+      transition: transform 0.3s ease;
+    }
+    #theme-toggle-btn:hover .material-symbols-outlined {
+      transform: rotate(20deg);
+    }
+
+  </style>
+</head>
+
+<body class="bg-warm-white text-on-surface min-h-screen">
+
+  <!-- ── TOP HEADER ── -->
+  <header class="sticky top-0 z-50 bg-warm-white border-b border-outline-variant/20 shadow-sm">
+    <div class="flex justify-between items-center px-6 h-14 w-full max-w-[600px] mx-auto">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined fill-icon text-primary" style="font-size:28px">wb_sunny</span>
+        <h1 class="text-xl font-bold text-primary">Good Morning AI</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="greeting-text" class="text-sm text-on-surface-variant font-semibold hidden sm:inline-block">Good
+          morning!</span>
+        <!-- ── DARK MODE TOGGLE BUTTON ── -->
+        <button id="theme-toggle-btn" onclick="toggleDarkMode()"
+          class="text-primary hover:text-primary-container transition-colors active:scale-95"
+          title="Toggle dark mode">
+          <span class="material-symbols-outlined" id="dark-mode-icon" style="font-size:28px">dark_mode</span>
+        </button>
+        <button onclick="toggleProfile()"
+          class="text-primary hover:text-primary-container transition-colors active:scale-95">
+          <span class="material-symbols-outlined fill-icon" style="font-size:32px">account_circle</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── PAGE: HOME ── -->
+  <div class="page active pb-28" id="page-home">
+    <main class="max-w-[600px] mx-auto px-6 pt-6 space-y-6">
+
+      <!-- Hero Banner -->
+      <section class="relative overflow-hidden rounded-2xl" style="background: linear-gradient(135deg, #f2994a 0%, #fdd355 60%, #f9a825 100%)">
+        <div class="px-7 py-7 relative z-10">
+          <p class="text-2xl font-bold text-white mb-1" style="line-height:1.5">Good Morning AI</p>
+          <p class="text-sm text-white/90 font-medium mt-1">Start your day with dynamic blessings &amp; AI-powered inspiration.</p>
+          <div class="flex gap-2 mt-4">
+            <button onclick="navigate('generate')" class="bg-white/25 hover:bg-white/40 text-white font-semibold text-sm px-4 py-2 rounded-full transition-all active:scale-95 flex items-center gap-1">
+              <span class="material-symbols-outlined fill-icon" style="font-size:16px">auto_awesome</span> Generate
+            </button>
+            <button onclick="navigate('today')" class="bg-white/25 hover:bg-white/40 text-white font-semibold text-sm px-4 py-2 rounded-full transition-all active:scale-95 flex items-center gap-1">
+              <span class="material-symbols-outlined fill-icon" style="font-size:16px">calendar_today</span> Today
+            </button>
+          </div>
+        </div>
+        <div class="absolute -bottom-6 -right-6 opacity-15">
+          <span class="material-symbols-outlined fill-icon text-white" style="font-size:130px">wb_sunny</span>
+        </div>
+      </section>
+
+      <!-- 3 AI Greeting Card Grid -->
+      <section>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-lg font-bold text-on-surface flex items-center gap-2">
+            <span class="material-symbols-outlined fill-icon text-primary" style="font-size:20px">auto_awesome</span>
+            <span class="font-bold text-lg">Today's Cards</span>
+          </h2>
+          <button onclick="loadHomeImages()" id="home-refresh-btn" class="flex items-center gap-1 text-primary font-semibold text-sm hover:underline active:scale-95 transition-all">
+            <span class="material-symbols-outlined" style="font-size:18px">refresh</span> Refresh
+          </button>
+        </div>
+
+        <!-- Loading state -->
+        <div id="home-img-loading" class="glass-card rounded-2xl p-8 flex flex-col items-center gap-4">
+          <div class="flex gap-2">
+            <div class="w-3 h-3 bg-primary rounded-full dot1"></div>
+            <div class="w-3 h-3 bg-primary-container rounded-full dot2"></div>
+            <div class="w-3 h-3 bg-secondary-container rounded-full dot3"></div>
+          </div>
+          <p class="text-sm text-on-surface-variant font-semibold">Generating morning cards...</p>
+        </div>
+
+        <!-- Image Grid -->
+        <div id="home-img-grid" class="hidden space-y-3">
+          <div class="grid grid-cols-3 gap-3" id="home-img-cards">
+            <!-- rendered by JS -->
+          </div>
+          <!-- Share CTA -->
+          <div class="glass-card rounded-2xl p-4 flex items-center justify-between gap-3">
+            <div class="text-sm">
+              <p class="font-bold text-on-surface" id="home-selected-label">Tap a card to select it</p>
+              <p class="text-xs text-on-surface-variant">Select an image and share it with your loved ones</p>
+            </div>
+            <button onclick="shareHomeImage()" id="home-share-btn"
+              class="sunrise-gradient text-white font-semibold text-sm px-5 py-3 rounded-full shadow-md active:scale-95 transition-all flex items-center gap-2 opacity-50 pointer-events-none"
+              disabled>
+              <span class="material-symbols-outlined fill-icon" style="font-size:18px">share</span> Share
+            </button>
+          </div>
+        </div>
+
+        <!-- Error state -->
+        <div id="home-img-error" class="hidden glass-card rounded-2xl p-6 text-center">
+          <span class="material-symbols-outlined text-error" style="font-size:40px">error_outline</span>
+          <p class="text-sm text-on-surface-variant mt-2">Could not load cards. <button onclick="loadHomeImages()" class="text-primary font-semibold hover:underline">Try again</button></p>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section>
+        <h2 class="text-lg font-bold text-on-surface mb-3 flex items-center gap-2">
+          <span class="material-symbols-outlined fill-icon text-primary" style="font-size:20px">grid_view</span> Features
+        </h2>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="glass-card rounded-2xl p-4 space-y-2">
+            <div class="bg-primary-container/40 w-10 h-10 rounded-xl flex items-center justify-center">
+              <span class="material-symbols-outlined fill-icon text-primary" style="font-size:22px">auto_awesome</span>
+            </div>
+            <h3 class="font-bold text-on-surface text-sm">AI Message Generator</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed">Generate beautiful morning messages in Urdu, Arabic, English &amp; more with Islamic or motivational tones.</p>
+          </div>
+          <div class="glass-card rounded-2xl p-4 space-y-2">
+            <div class="bg-secondary-container/50 w-10 h-10 rounded-xl flex items-center justify-center">
+              <span class="material-symbols-outlined fill-icon text-secondary" style="font-size:22px">palette</span>
+            </div>
+            <h3 class="font-bold text-on-surface text-sm">AI Greeting Cards</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed">Turn your message into a stunning Islamic greeting card image — ready to share on WhatsApp &amp; social media.</p>
+          </div>
+          <div class="glass-card rounded-2xl p-4 space-y-2">
+            <div class="bg-tertiary-container/40 w-10 h-10 rounded-xl flex items-center justify-center">
+              <span class="material-symbols-outlined fill-icon text-tertiary" style="font-size:22px">share</span>
+            </div>
+            <h3 class="font-bold text-on-surface text-sm">One-Tap Share</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed">Share your messages and cards directly to WhatsApp, Instagram, and other apps with a single tap.</p>
+          </div>
+          <div class="glass-card rounded-2xl p-4 space-y-2">
+            <div class="bg-primary-fixed/60 w-10 h-10 rounded-xl flex items-center justify-center">
+              <span class="material-symbols-outlined fill-icon text-primary" style="font-size:22px">notifications_active</span>
+            </div>
+            <h3 class="font-bold text-on-surface text-sm">Daily Notifications</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed">Set a custom time to receive a fresh Islamic morning greeting every single day — automatically.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Profile & Night Mode Quick Section -->
+      <section>
+        <h2 class="text-lg font-bold text-on-surface mb-3 flex items-center gap-2">
+          <span class="material-symbols-outlined fill-icon text-primary" style="font-size:20px">manage_accounts</span> Quick Settings
+        </h2>
+        <div class="glass-card rounded-2xl p-4 flex gap-3">
+          <button onclick="toggleProfile()" class="flex-1 flex flex-col items-center gap-2 py-3 rounded-xl bg-primary-fixed/30 hover:bg-primary-fixed/50 transition-all active:scale-95">
+            <span class="material-symbols-outlined fill-icon text-primary" style="font-size:32px">account_circle</span>
+            <span class="text-xs font-semibold text-on-surface">Profile</span>
+          </button>
+          <button onclick="toggleDarkMode()" class="flex-1 flex flex-col items-center gap-2 py-3 rounded-xl bg-surface-container-high hover:bg-surface-container-highest transition-all active:scale-95">
+            <span class="material-symbols-outlined text-on-surface" id="home-dark-icon" style="font-size:32px">dark_mode</span>
+            <span class="text-xs font-semibold text-on-surface" id="home-dark-label">Night Mode</span>
+          </button>
+          <button onclick="navigate('settings')" class="flex-1 flex flex-col items-center gap-2 py-3 rounded-xl bg-secondary-container/30 hover:bg-secondary-container/50 transition-all active:scale-95">
+            <span class="material-symbols-outlined fill-icon text-secondary" style="font-size:32px">settings</span>
+            <span class="text-xs font-semibold text-on-surface">Settings</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Cloudinary History Section -->
+      <section id="home-history-section" class="hidden">
+        <h2 class="text-lg font-bold text-on-surface mb-3 flex items-center gap-2">
+          <span class="material-symbols-outlined fill-icon text-primary" style="font-size:20px">history</span> Recent Cards
+        </h2>
+        <div id="home-history-grid" class="grid grid-cols-3 gap-3">
+          <!-- rendered by JS -->
+        </div>
+      </section>
+
+      <!-- How to Use -->
+      <section class="pb-4">
+        <h2 class="text-lg font-bold text-on-surface mb-3 flex items-center gap-2">
+          <span class="material-symbols-outlined fill-icon text-primary" style="font-size:20px">help_outline</span> How to Use
+        </h2>
+        <div class="glass-card rounded-2xl p-5 space-y-4">
+          <div class="flex gap-4 items-start">
+            <div class="sunrise-gradient w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+              <span class="text-white font-bold text-sm">1</span>
+            </div>
+            <div>
+              <p class="font-semibold text-on-surface text-sm">Generate a Message</p>
+              <p class="text-xs text-on-surface-variant mt-0.5">Go to <strong>Generate</strong> tab. Choose your preferred language &amp; tone. Tap <em>Generate Message</em>.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="sunrise-gradient w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+              <span class="text-white font-bold text-sm">2</span>
+            </div>
+            <div>
+              <p class="font-semibold text-on-surface text-sm">Create a Card</p>
+              <p class="text-xs text-on-surface-variant mt-0.5">Tap <em>Card</em> button to turn your message into a beautiful AI image card.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="sunrise-gradient w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+              <span class="text-white font-bold text-sm">3</span>
+            </div>
+            <div>
+              <p class="font-semibold text-on-surface text-sm">Share with Loved Ones</p>
+              <p class="text-xs text-on-surface-variant mt-0.5">Share your card via WhatsApp, Instagram or any app. You can also select from the 3 morning cards above and share instantly.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="sunrise-gradient w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+              <span class="text-white font-bold text-sm">4</span>
+            </div>
+            <div>
+              <p class="font-semibold text-on-surface text-sm">Enable Daily Blessings</p>
+              <p class="text-xs text-on-surface-variant mt-0.5">Subscribe to daily notifications in Settings to receive a fresh morning greeting at your preferred time every morning.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ── PAGE: GENERATE ── -->
+  <div class="page pb-28" id="page-generate">
+    <main class="max-w-[600px] mx-auto px-6 pt-6 space-y-5">
+
+      <!-- Hero -->
+      <section class="sunrise-gradient rounded-2xl p-7 shadow-sm text-on-primary-fixed overflow-hidden relative">
+        <div class="relative z-10">
+          <h2 class="text-[28px] font-bold leading-tight mb-1"> Good Morning AI</h2>
+          <p class="text-base opacity-90">Start your day with inspiration and light.</p>
+        </div>
+        <div class="absolute -bottom-4 -right-4 opacity-20">
+          <span class="material-symbols-outlined fill-icon" style="font-size:110px">wb_sunny</span>
+        </div>
+      </section>
+
+      <!-- Config Card -->
+      <section class="glass-card rounded-2xl p-6 space-y-4">
+        <!-- Language -->
+        <div class="space-y-1">
+          <label class="block text-sm font-semibold text-on-surface-variant" for="language-select">Select
+            Language</label>
+          <div class="relative">
+            <select id="language-select"
+              class="w-full h-14 border-2 border-outline-variant/40 rounded-xl px-4 bg-white focus:ring-2 focus:ring-primary focus:border-primary appearance-none text-base font-medium">
+              <option value="English">English</option>
+              <option value="Urdu">Urdu (اردو)</option>
+              <option value="Arabic">Arabic (العربية)</option>
+              <option value="Hindi">Hindi (हिन्दी)</option>
+              <option value="Chinese">Chinese (中文)</option>
+              <option value="Spanish">Spanish (Español)</option>
+              <option value="French">French (Français)</option>
+            </select>
+            <span
+              class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+          </div>
+        </div>
+
+        <!-- Tone -->
+        <div class="space-y-1">
+          <label class="block text-sm font-semibold text-on-surface-variant" for="tone-select">Select Message
+            Tone</label>
+          <div class="relative">
+            <select id="tone-select"
+              class="w-full h-14 border-2 border-outline-variant/40 rounded-xl px-4 bg-white focus:ring-2 focus:ring-primary focus:border-primary appearance-none text-base font-medium">
+              <option value="Motivational">Motivational</option>
+              <option value="Islamic">Islamic</option>
+              <option value="Funny">Funny</option>
+              <option value="Romantic">Romantic</option>
+              <option value="Professional">Professional</option>
+              <option value="Poetic">Poetic</option>
+            </select>
+            <span
+              class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex flex-col gap-3 pt-1">
+          <button onclick="generateMessage()" id="generate-btn"
+            class="sunrise-gradient text-white h-14 font-semibold text-lg rounded-full shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined fill-icon">auto_awesome</span>
+            Generate Message
+          </button>
+          <button onclick="savePreferences()" id="save-btn"
+            class="border-2 border-primary text-primary h-14 font-semibold text-lg rounded-full transition-transform active:scale-95 flex items-center justify-center gap-2 bg-white">
+            <span class="material-symbols-outlined">save</span>
+            Save Preferences
+          </button>
+        </div>
+      </section>
+
+      <!-- Notification Button -->
+      <button onclick="subscribeNotifications()" id="notif-btn"
+        class="w-full bg-inverse-surface text-inverse-on-surface rounded-2xl p-5 ambient-shadow flex items-center justify-between transition-transform active:scale-[0.98] group">
+        <div class="flex items-center gap-4">
+          <div class="bg-primary-container p-3 rounded-full text-on-primary-container">
+            <span class="material-symbols-outlined fill-icon">notifications_active</span>
+          </div>
+          <div class="text-left">
+            <p class="font-semibold text-base" id="notif-label">Enable Daily Notification</p>
+            <p class="text-sm opacity-70" id="notif-sub">Wake up to a fresh blessing every day.</p>
+          </div>
+        </div>
+        <span id="notif-arrow"
+          class="material-symbols-outlined text-primary-fixed-dim group-hover:translate-x-1 transition-transform">arrow_forward</span>
+      </button>
+
+      <!-- Message Result (hidden initially) -->
+      <section id="message-result" class="space-y-4 hidden">
+        <!-- Message Box -->
+        <div class="bg-secondary-container/30 border-2 border-secondary-container rounded-2xl p-7 ambient-shadow">
+          <div class="flex justify-between items-start mb-4">
+            <span class="material-symbols-outlined fill-icon text-primary" style="font-size:32px">format_quote</span>
+            <span
+              class="bg-white/60 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-primary">Your
+              Message</span>
+          </div>
+          <p id="message-text" class="text-[26px] leading-[1.45] text-[#333333] font-bold text-center" dir="auto"></p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-3 gap-3">
+          <button onclick="copyMessage()"
+            class="bg-surface-container-highest text-on-surface h-14 rounded-xl font-semibold text-sm flex items-center justify-center gap-1 hover:bg-surface-variant transition-colors active:scale-95">
+            <span class="material-symbols-outlined" style="font-size:20px">content_copy</span> Copy
+          </button>
+          <button onclick="shareMessage()"
+            class="bg-primary-container text-on-primary-container h-14 rounded-xl font-semibold text-sm flex items-center justify-center gap-1 hover:opacity-90 transition-opacity active:scale-95">
+            <span class="material-symbols-outlined fill-icon" style="font-size:20px">share</span> Share
+          </button>
+          <button onclick="generateImage()" id="img-btn"
+            class="bg-tertiary-container text-on-tertiary-container h-14 rounded-xl font-semibold text-sm flex items-center justify-center gap-1 hover:opacity-90 transition-opacity active:scale-95">
+            <span class="material-symbols-outlined" style="font-size:20px">palette</span> Card
+          </button>
+        </div>
+
+        <!-- Image Result -->
+        <div id="image-result" class="hidden rounded-2xl overflow-hidden ambient-shadow border-4 border-white fade-in">
+          <img id="generated-image" src="" alt="Generated Good Morning Card" class="w-full" />
+          <div class="bg-white p-4 flex justify-center gap-4">
+            <button onclick="downloadImage()" class="flex items-center gap-2 text-primary font-bold hover:underline">
+              <span class="material-symbols-outlined fill-icon" style="font-size:20px">download</span> Download Card
+            </button>
+            <button onclick="shareImageCard()" id="share-card-btn"
+              class="flex items-center gap-2 text-primary font-bold hover:underline">
+              <span class="material-symbols-outlined fill-icon" style="font-size:20px">share</span> Share Card
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ── PAGE: TODAY ── -->
+  <div class="page pb-28" id="page-today">
+    <main class="max-w-[600px] mx-auto px-6 pt-6">
+
+      <!-- Hero image area -->
+      <section class="mb-5">
+        <div class="relative overflow-hidden rounded-2xl ambient-shadow">
+          <div id="today-image-wrap" class="w-full aspect-[4/3] sunrise-gradient flex items-center justify-center">
+            <span class="material-symbols-outlined fill-icon text-white opacity-40"
+              style="font-size:80px">wb_sunny</span>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6">
+            <span
+              class="inline-block bg-primary-container text-on-primary-container font-semibold text-sm px-4 py-1 rounded-full w-fit mb-2">Today's
+              Special Blessing</span>
+            <h1 class="text-[26px] font-bold text-white" id="today-title">A New Day of Grace</h1>
+          </div>
+        </div>
+      </section>
+
+      <!-- Message Card -->
+      <section class="mb-5">
+        <div class="bg-white rounded-2xl p-6 border border-black/5 ambient-shadow">
+          <h2 class="font-semibold text-sm text-primary mb-3 flex items-center gap-2">
+            <span class="material-symbols-outlined fill-icon" style="font-size:18px">auto_awesome</span> DAILY MESSAGE
+          </h2>
+          <p id="today-message-en" class="text-lg text-on-surface leading-relaxed italic mb-5">
+            Tap "Generate" on the Home tab to create today's message.
+          </p>
+          <div class="h-px bg-outline-variant/30 w-full mb-5"></div>
+          <div class="urdu-text text-right" id="today-urdu-section" style="display:none">
+            <h2 class="font-semibold text-sm text-primary mb-3 flex items-center gap-2 justify-end">
+              آج کا پیغام <span class="material-symbols-outlined fill-icon" style="font-size:18px">favorite</span>
+            </h2>
+            <p id="today-message-ur" class="text-[24px] leading-[44px] text-on-surface font-semibold"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Actions -->
+      <section class="flex flex-col gap-3 mb-5">
+        <button onclick="shareToday()"
+          class="sunrise-gradient w-full h-16 rounded-xl flex items-center justify-center gap-3 ambient-shadow active:scale-95 transition-all">
+          <span class="material-symbols-outlined fill-icon text-white text-[26px]">share</span>
+          <span class="font-semibold text-lg text-white">Share Message</span>
+        </button>
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="copyToday()"
+            class="bg-white border-2 border-tertiary-container h-14 rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-all">
+            <span class="material-symbols-outlined fill-icon text-tertiary">content_copy</span>
+            <span class="font-semibold text-tertiary">Copy</span>
+          </button>
+          <button onclick="downloadTodayImage()"
+            class="bg-white border-2 border-primary-fixed-dim h-14 rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-all">
+            <span class="material-symbols-outlined fill-icon text-primary">download</span>
+            <span class="font-semibold text-primary">Save Image</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Morning Reflection -->
+      <section class="mb-6">
+        <div class="bg-tertiary-container/10 p-6 rounded-2xl flex items-start gap-4">
+          <div class="bg-tertiary-container p-3 rounded-full shrink-0">
+            <span class="material-symbols-outlined text-white">info</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-tertiary mb-1">Morning Reflection</h3>
+            <p class="text-base text-on-tertiary-container">Take 5 minutes this morning to sit in silence. Focus on one
+              thing you are truly thankful for today.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ── PAGE: HISTORY ── -->
+  <div class="page pb-28" id="page-history">
+    <main class="max-w-[600px] mx-auto px-6 pt-6">
+      <section class="mb-5">
+        <h1 class="text-[28px] font-bold text-primary mb-1">History</h1>
+        <p class="text-on-surface-variant">Your previously generated messages.</p>
+      </section>
+      <div id="history-list" class="space-y-4">
+        <div
+          class="bg-white rounded-2xl p-5 border border-black/5 ambient-shadow flex items-center justify-center h-32 text-on-surface-variant">
+          <div class="text-center">
+            <span class="material-symbols-outlined" style="font-size:40px">history</span>
+            <p class="mt-2 text-sm">No messages yet. Generate your first one!</p>
+          </div>
+          <section class="mt-8">
+            <h2 class="text-xl font-bold text-primary mb-3">Saved Cards</h2>
+            <div id="history-cards-grid" class="grid grid-cols-3 gap-3"></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ── PAGE: SETTINGS ── -->
+  <div class="page pb-28" id="page-settings">
+    <main class="max-w-[600px] mx-auto px-6 pt-6">
+      <section class="mb-5">
+        <h1 class="text-[28px] font-bold text-on-surface mb-1">Settings</h1>
+        <p class="text-on-surface-variant">Customize your daily spiritual experience.</p>
+      </section>
+
+      <div class="space-y-4">
+        <!-- Notification Time -->
+        <div class="bg-white rounded-2xl p-6 border border-black/5 ambient-shadow">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="material-symbols-outlined text-primary">schedule</span>
+            <div>
+              <h2 class="text-xl font-semibold text-primary">Notification Time</h2>
+              <p class="text-on-surface-variant text-sm">Choose when to receive your daily message.</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-center py-4 bg-surface-container-low rounded-xl">
+            <input type="time" id="time-input"
+              class="text-4xl font-bold text-primary-container px-5 py-2 bg-white rounded-xl border-2 border-primary-container shadow-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+              value="04:00">
+          </div>
+        </div>
+
+        <!-- Language -->
+        <div class="bg-white rounded-2xl p-6 border border-black/5 ambient-shadow">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="material-symbols-outlined text-primary">language</span>
+            <div>
+              <h2 class="text-xl font-semibold text-primary">Default Language</h2>
+              <p class="text-on-surface-variant text-sm">Choose your preferred message language.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 gap-3" id="lang-options">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Tone -->
+        <div class="bg-white rounded-2xl p-6 border border-black/5 ambient-shadow">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="material-symbols-outlined text-primary">palette</span>
+            <div>
+              <h2 class="text-xl font-semibold text-primary">Default Tone</h2>
+              <p class="text-on-surface-variant text-sm">Choose your preferred message tone.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 gap-3" id="tone-options">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-black/5 ambient-shadow">
+          <label class="block text-sm font-semibold text-on-surface-variant mb-2" for="card-style-select">Default card style</label>
+          <select id="card-style-select" class="w-full h-12 border-2 border-outline-variant/40 rounded-xl px-4 bg-white">
+            <option value="sunrise">Sunrise</option>
+            <option value="minimal">Minimal</option>
+            <option value="floral">Floral</option>
+          </select>
+        </div>
+
+        <!-- Daily Reminder Toggle -->
+        <div
+          class="bg-white rounded-2xl p-6 border border-black/5 ambient-shadow flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">notifications_active</span>
+            <div>
+              <h2 class="text-xl font-semibold text-primary">Daily Reminder</h2>
+              <p class="text-on-surface-variant text-sm">Receive a gentle nudge each morning.</p>
+            </div>
+          </div>
+          <div class="relative inline-block w-14 h-8 align-middle select-none">
+            <input id="notif-toggle" type="checkbox"
+              class="toggle-checkbox absolute block w-8 h-8 rounded-full bg-white border-4 appearance-none cursor-pointer z-10" />
+            <label for="notif-toggle"
+              class="toggle-label block overflow-hidden h-8 rounded-full bg-surface-container cursor-pointer transition-colors duration-300"></label>
+          </div>
+        </div>
+
+        <!-- Save Button -->
+        <div class="pt-2 pb-4">
+          <button onclick="saveSettings()"
+            class="w-full h-16 sunrise-gradient text-white font-semibold text-lg rounded-2xl shadow-lg active:scale-95 transition-all flex items-center justify-center gap-3">
+            <span class="material-symbols-outlined fill-icon">save</span>
+            Save Changes
+          </button>
+          <p class="text-center text-on-surface-variant text-sm mt-3">Changes will be applied immediately.</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-3 pb-6">
+          <button onclick="logout()" class="w-full h-12 rounded-xl border-2 border-outline-variant text-on-surface font-semibold">Log out</button>
+          <button onclick="deleteAccount()" class="w-full h-12 rounded-xl border-2 border-error text-error font-semibold">Delete account and data</button>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="mt-12 pt-8 border-t border-outline-variant/20 text-center">
+        <div class="flex flex-wrap justify-center gap-4 mb-4">
+          <a href="Privacy Policy.html" class="text-primary hover:underline text-sm font-medium transition-colors">Privacy Policy</a>
+          <span class="text-on-surface-variant">/</span>
+          <a href="Terms & Conditions.html" class="text-primary hover:underline text-sm font-medium transition-colors">Terms & Condition</a>
+          <span class="text-on-surface-variant">/</span>
+          <a href="Contact Us.html" class="text-primary hover:underline text-sm font-medium transition-colors">Contact Us</a>
+          <span class="text-on-surface-variant">/</span>
+          <a href="About Us.html" class="text-primary hover:underline text-sm font-medium transition-colors">About</a>
+        </div>
+        <p class="text-on-surface-variant text-xs">© 2026 Good Morning AI. All rights reserved.</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- ── BOTTOM NAVIGATION ── -->
+  <nav
+    class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-outline-variant/20 shadow-[0_-4px_12px_rgba(51,51,51,0.08)] rounded-t-2xl">
+    <div class="flex justify-around items-center h-20 max-w-[600px] mx-auto px-4">
+      <button onclick="navigate('home')"
+        class="nav-item active flex flex-col items-center justify-center px-3 py-2 gap-1" id="nav-home">
+        <span class="material-symbols-outlined fill-icon" style="font-size:24px">home</span>
+        <span class="text-xs font-semibold">Home</span>
+      </button>
+      <button onclick="navigate('generate')"
+        class="nav-item flex flex-col items-center justify-center px-3 py-2 gap-1 text-on-surface-variant" id="nav-generate">
+        <span class="material-symbols-outlined" style="font-size:24px">auto_awesome</span>
+        <span class="text-xs font-semibold">Generate</span>
+      </button>
+      <button onclick="navigate('today')"
+        class="nav-item flex flex-col items-center justify-center px-3 py-2 gap-1 text-on-surface-variant"
+        id="nav-today">
+        <span class="material-symbols-outlined" style="font-size:24px">calendar_today</span>
+        <span class="text-xs font-semibold">Today</span>
+      </button>
+      <button onclick="navigate('history')"
+        class="nav-item flex flex-col items-center justify-center px-3 py-2 gap-1 text-on-surface-variant"
+        id="nav-history">
+        <span class="material-symbols-outlined" style="font-size:24px">history</span>
+        <span class="text-xs font-semibold">History</span>
+      </button>
+      <button onclick="navigate('settings')"
+        class="nav-item flex flex-col items-center justify-center px-3 py-2 gap-1 text-on-surface-variant"
+        id="nav-settings">
+        <span class="material-symbols-outlined" style="font-size:24px">settings</span>
+        <span class="text-xs font-semibold">Settings</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── TOAST ── -->
+  <div id="toast"
+    class="fixed bottom-24 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-6 py-3 rounded-full shadow-xl flex items-center gap-2 z-[1000] pointer-events-none transition-all">
+    <span class="material-symbols-outlined fill-icon text-success-green" id="toast-icon">check_circle</span>
+    <span class="font-semibold text-sm" id="toast-msg">Action Successful</span>
+  </div>
+
+  <!-- ── LOADING OVERLAY ── -->
+  <div id="loading-overlay"
+    class="fixed inset-0 bg-black/30 backdrop-blur-sm z-[200] hidden items-center justify-center">
+    <div class="bg-white rounded-2xl p-8 flex flex-col items-center gap-4 shadow-2xl">
+      <div class="flex gap-2">
+        <div class="w-3 h-3 bg-primary rounded-full dot1"></div>
+        <div class="w-3 h-3 bg-primary-container rounded-full dot2"></div>
+        <div class="w-3 h-3 bg-secondary-container rounded-full dot3"></div>
+      </div>
+      <p id="loading-text" class="text-base font-semibold text-on-surface">Generating your message...</p>
+    </div>
+  </div>
+
+  <!-- ── SIGN UP MODAL ── -->
+  <div id="signup-modal"
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[300] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-2xl relative fade-in">
+      <div class="text-center mb-6">
+        <span class="material-symbols-outlined fill-icon text-primary" style="font-size:48px">wb_sunny</span>
+        <h2 class="text-2xl font-bold text-on-surface mt-2">Welcome to Good Morning AI</h2>
+        <p class="text-on-surface-variant text-sm mt-1">Please sign up to continue.</p>
+      </div>
+      <div id="signup-error" class="hidden text-sm text-red-600 bg-red-50 border border-red-200 p-3 rounded-xl text-center mb-4 font-medium"></div>
+      <form id="signup-form" class="space-y-4" onsubmit="handleSignup(event)">
+        <div>
+          <label class="block text-sm font-semibold text-on-surface-variant mb-1" for="signup-name">Name</label>
+          <input type="text" id="signup-name" required placeholder="e.g. Asfand Haroon"
+            class="w-full h-12 border-2 border-outline-variant/40 rounded-xl px-4 bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-on-surface-variant mb-1" for="signup-email">Email</label>
+          <input type="email" id="signup-email" required placeholder="you@example.com"
+            class="w-full h-12 border-2 border-outline-variant/40 rounded-xl px-4 bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-on-surface-variant mb-1" for="signup-password">Password</label>
+          <input type="password" id="signup-password" required minlength="8" placeholder="At least 8 characters"
+            class="w-full h-12 border-2 border-outline-variant/40 rounded-xl px-4 bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+          <span class="text-[11px] text-on-surface-variant/70 mt-1 block">Must be at least 8 characters</span>
+        </div>
+        <button type="submit" id="signup-btn"
+          class="w-full h-14 sunrise-gradient text-white font-semibold text-lg rounded-xl shadow-lg mt-2 active:scale-95 transition-transform">
+          Sign Up
+        </button>
+        <p class="text-center text-on-surface-variant text-xs mt-4">By signing up, you agree to our <a href="Terms & Conditions.html" class="text-primary font-semibold hover:underline">Terms & Conditions</a> and <a href="Privacy Policy.html" class="text-primary font-semibold hover:underline">Privacy Policy</a>.</p>
+      </form>
+      <div class="mt-4 text-center">
+        <button onclick="toggleAuthModals('login')" class="text-sm text-primary font-semibold hover:underline">Already have an account? Log in</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── LOGIN MODAL ── -->
+  <div id="login-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[300] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-2xl relative fade-in">
+      <div class="text-center mb-6">
+        <span class="material-symbols-outlined fill-icon text-primary" style="font-size:48px">login</span>
+        <h2 class="text-2xl font-bold text-on-surface mt-2">Welcome Back</h2>
+        <p class="text-on-surface-variant text-sm mt-1">Please log in to continue.</p>
+      </div>
+      <div id="login-error" class="hidden text-sm text-red-600 bg-red-50 border border-red-200 p-3 rounded-xl text-center mb-4 font-medium"></div>
+      <form id="login-form" class="space-y-4" onsubmit="handleLogin(event)">
+        <div>
+          <label class="block text-sm font-semibold text-on-surface-variant mb-1" for="login-email">Email</label>
+          <input type="email" id="login-email" required placeholder="you@example.com" class="w-full h-12 border-2 border-outline-variant/40 rounded-xl px-4 bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+        </div>
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <label class="block text-sm font-semibold text-on-surface-variant" for="login-password">Password</label>
+            <button type="button" onclick="toggleAuthModals('reset')" class="text-xs text-primary font-semibold hover:underline">Forgot password?</button>
+          </div>
+          <input type="password" id="login-password" required placeholder="Your password" class="w-full h-12 border-2 border-outline-variant/40 rounded-xl px-4 bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+        </div>
+        <button type="submit" id="login-btn" class="w-full h-14 sunrise-gradient text-white font-semibold text-lg rounded-xl shadow-lg mt-2 active:scale-95 transition-transform">
+          Log In
+        </button>
+      </form>
+      <div class="mt-4 text-center">
+        <button onclick="toggleAuthModals('signup')" class="text-sm text-primary font-semibold hover:underline">Don't have an account? Sign up</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RESET PASSWORD MODAL ── -->
+  <div id="reset-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[300] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-2xl relative fade-in">
+      <div class="text-center mb-6">
+        <span class="material-symbols-outlined fill-icon text-primary" style="font-size:48px">lock_reset</span>
+        <h2 class="text-2xl font-bold text-on-surface mt-2">Reset Password</h2>
+        <p class="text-on-surface-variant text-sm mt-1">Enter your registered email and a new password.</p>
+      </div>
+      <div id="reset-error" class="hidden text-sm text-red-600 bg-red-50 border border-red-200 p-3 rounded-xl text-center mb-4 font-medium"></div>
+      <form id="forgot-form" class="space-y-4" onsubmit="handleForgotPassword(event)">
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1" for="forgot-email">Email</label>
+        <input type="email" id="forgot-email" required autocomplete="email" placeholder="you@example.com" class="w-full h-12 border-2 border-outline-variant/40 rounded-xl px-4 bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+        <button type="submit" id="forgot-btn" class="w-full h-14 sunrise-gradient text-white font-semibold text-lg rounded-xl shadow-lg mt-2">Send reset link</button>
+      </form>
+      <form id="reset-form" class="space-y-4 hidden" onsubmit="handleResetPassword(event)">
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1" for="reset-password">New password</label>
+        <input type="password" id="reset-password" required minlength="8" maxlength="128" autocomplete="new-password" placeholder="At least 8 characters" class="w-full h-12 border-2 border-outline-variant/40 rounded-xl px-4 bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+        <button type="submit" id="reset-btn" class="w-full h-14 sunrise-gradient text-white font-semibold text-lg rounded-xl shadow-lg mt-2">Update password</button>
+      </form>
+      <div class="mt-4 text-center">
+        <button onclick="toggleAuthModals('login')" class="text-sm text-primary font-semibold hover:underline">Back to Log In</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROFILE MODAL ── -->
+  <div id="profile-modal"
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[300] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-8 w-full max-w-sm shadow-2xl relative fade-in text-center">
+      <span class="material-symbols-outlined fill-icon text-primary mb-4" style="font-size:64px">account_circle</span>
+      <h2 class="text-2xl font-bold text-on-surface" id="profile-name">Name</h2>
+      <p class="text-on-surface-variant" id="profile-email">email@example.com</p>
+      <button onclick="logout()"
+        class="w-full h-12 bg-white border-2 border-error text-error font-semibold text-lg rounded-xl shadow-sm mt-6 active:scale-95 transition-transform">
+        Log Out
+      </button>
+      <button onclick="deleteAccount()"
+        class="w-full h-12 bg-white border-2 border-error/50 text-error font-semibold rounded-xl shadow-sm mt-3">
+        Delete Account
+      </button>
+      <button onclick="closeProfileModal()"
+        class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // ── CONFIG ──
+    const API_BASE = (() => {
+      if (window.location.protocol === "file:") return "http://localhost:5000";
+      if (window.location.port === "5000") return "";
+      if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+        return `http://${window.location.hostname}:5000`;
+      }
+      return "";
+    })();
+
+    // ── STATE ──
+    let currentMessage = "";
+    let currentTone = "";
+    let currentLanguage = "";
+    let currentImageDataUrl = "";
+    let messageHistory = [];
+    let settings = {};
+    let accessToken = null;
+    let refreshPromise = null;
+    let resetToken = new URLSearchParams(window.location.search).get("resetToken") || "";
+
+    function getToken() {
+      return accessToken;
+    }
+
+    function authHeaders() {
+      const token = getToken();
+      return token
+        ? { "Content-Type": "application/json", "Authorization": "Bearer " + token }
+        : { "Content-Type": "application/json" };
+    }
+
+    function saveSession(data) {
+      accessToken = data.accessToken;
+      localStorage.setItem("gm_user", JSON.stringify({
+        id: data.user.id,
+        name: data.user.name,
+        email: data.user.email
+      }));
+    }
+
+    async function refreshAccessToken(showExpiredMessage = false) {
+      if (refreshPromise) return refreshPromise;
+      refreshPromise = (async () => {
+        try {
+          const response = await window.fetch(`${API_BASE}/refresh`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({})
+          });
+          if (!response.ok) throw new Error("Refresh session is unavailable.");
+          const data = await response.json();
+          saveSession(data);
+          return true;
+        } catch {
+          accessToken = null;
+          localStorage.removeItem("gm_user");
+          if (showExpiredMessage && typeof showToast === "function") {
+            showToast("Your session expired. Please sign in again.", true);
+          }
+          return false;
+        } finally {
+          refreshPromise = null;
+        }
+      })();
+      return refreshPromise;
+    }
+
+    const _origFetch = window.fetch.bind(window);
+    window.fetch = async function(url, opts = {}) {
+      const options = { ...opts, credentials: opts.credentials || "include" };
+      let response = await _origFetch(url, options);
+      const headers = new Headers(options.headers || {});
+      if (response.status === 401 && headers.has("Authorization") && !String(url).endsWith("/refresh")) {
+        if (await refreshAccessToken(true)) {
+          headers.set("Authorization", `Bearer ${accessToken}`);
+          response = await _origFetch(url, { ...options, headers });
+        } else {
+          toggleAuthModals("login");
+        }
+      }
+      return response;
+    };
+
+    function getHistoryKey() {
+      const userStr = localStorage.getItem("gm_user");
+      if (userStr) {
+        try { return "gm_history_" + JSON.parse(userStr).email; } catch(e){}
+      }
+      return "gm_history";
+    }
+
+    function getSettingsKey() {
+      const userStr = localStorage.getItem("gm_user");
+      if (userStr) {
+        try { return "gm_settings_" + JSON.parse(userStr).email; } catch(e){}
+      }
+      return "gm_settings";
+    }
+
+    function loadHistoryData() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(getHistoryKey()) || "[]");
+        messageHistory = Array.isArray(parsed) ? parsed.slice(0, 20) : [];
+      } catch {
+        messageHistory = [];
+      }
+    }
+
+    function loadSettingsData() {
+      const defaults = {
+        language: "English",
+        tone: "Motivational",
+        time: "04:00",
+        notifEnabled: false,
+        defaultCardStyle: "sunrise"
+      };
+      try {
+        settings = { ...defaults, ...JSON.parse(localStorage.getItem(getSettingsKey()) || "{}") };
+      } catch {
+        settings = defaults;
+      }
+    }
+
+    // Initialize state
+    loadHistoryData();
+    loadSettingsData();
+
+    // ── DARK MODE ──
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      html.classList.remove('dark', 'light');
+      html.classList.add(isDark ? 'light' : 'dark');
+      localStorage.setItem('gm_theme', isDark ? 'light' : 'dark');
+      updateDarkModeButton();
+    }
+
+    function updateDarkModeButton() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const icon = document.getElementById('dark-mode-icon');
+      if (icon) icon.textContent = isDark ? 'light_mode' : 'dark_mode';
+      // Also update home page dark mode button
+      const homeIcon = document.getElementById('home-dark-icon');
+      const homeLabel = document.getElementById('home-dark-label');
+      if (homeIcon) homeIcon.textContent = isDark ? 'light_mode' : 'dark_mode';
+      if (homeLabel) homeLabel.textContent = isDark ? 'Light Mode' : 'Night Mode';
+    }
+
+    // ── INIT ──
+    document.addEventListener("DOMContentLoaded", async () => {
+      localStorage.removeItem("gm_token");
+      await refreshAccessToken();
+      setGreeting();
+      loadSettings();
+      renderHistory();
+      renderLangOptions();
+      renderToneOptions();
+      updateDarkModeButton();
+      const savedPage = localStorage.getItem("gm_page");
+      const validPages = ["home", "generate", "today", "history", "settings"];
+      navigate(validPages.includes(savedPage) ? savedPage : "home");
+
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js").catch((error) => {
+          console.error("Service worker registration failed:", error);
+        });
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const cardMessage = urlParams.get("msg");
+      const cardUrl = urlParams.get("image");
+      if (cardMessage && cardUrl) {
+        try {
+          const parsedImageUrl = new URL(cardUrl);
+          if (parsedImageUrl.origin === "https://res.cloudinary.com") {
+            currentMessage = cardMessage;
+            currentImageDataUrl = cardUrl;
+            document.getElementById("generated-image").src = cardUrl;
+            document.getElementById("image-result").classList.remove("hidden");
+            document.getElementById("message-text").textContent = cardMessage;
+            document.getElementById("message-result").classList.remove("hidden");
+            navigate("generate");
+          }
+        } catch {
+          showToast("This shared card link is invalid.", true);
+        }
+      }
+
+      const langSel = document.getElementById("language-select");
+      const toneSel = document.getElementById("tone-select");
+      if (settings.language) langSel.value = settings.language;
+      if (settings.tone) toneSel.value = settings.tone;
+      document.getElementById("card-style-select").value = settings.defaultCardStyle || "sunrise";
+      if (messageHistory.length) {
+        const latest = messageHistory[0];
+        currentMessage = latest.message;
+        currentLanguage = latest.language;
+        currentTone = latest.tone;
+        updateTodayPage(latest.message, latest.language);
+      }
+      if (getToken()) loadCloudinaryHistory();
+
+      if (resetToken) {
+        toggleAuthModals("reset");
+        document.getElementById("forgot-form").classList.add("hidden");
+        document.getElementById("reset-form").classList.remove("hidden");
+      } else if (!getToken()) {
+        toggleAuthModals("signup");
+      }
+    });
+
+    function setGreeting() {
+      const h = new Date().getHours();
+      const greet = h < 12 ? "Good morning!" : h < 17 ? "Good afternoon!" : "Good evening!";
+      document.getElementById("greeting-text").textContent = greet;
+    }
+
+    function loadSettings() {
+      document.getElementById("notif-toggle").checked = settings.notifEnabled || false;
+      if (settings.time) {
+        document.getElementById("time-input").value = settings.time;
+      }
+      document.getElementById("card-style-select").value = settings.defaultCardStyle || "sunrise";
+    }
+
+    function renderLangOptions() {
+      const langs = ["English", "Urdu (اردو)", "Arabic (العربية)", "Hindi (हिन्दी)", "Chinese (中文)", "Spanish", "French"];
+      const langMap = { "Urdu (اردو)": "Urdu", "Arabic (العربية)": "Arabic", "Hindi (हिन्दी)": "Hindi", "Chinese (中文)": "Chinese" };
+      const saved = settings.language || "English";
+      const container = document.getElementById("lang-options");
+      container.replaceChildren();
+      langs.forEach((label) => {
+        const val = langMap[label] || label;
+        const active = val === saved;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.id = `lang-btn-${val}`;
+        button.className = `flex justify-between items-center w-full min-h-[56px] px-4 rounded-xl border-2 transition-all font-semibold ${active ? "border-primary-container bg-primary-fixed text-primary" : "border-outline-variant text-on-surface hover:bg-surface-variant"}`;
+        button.setAttribute("aria-pressed", String(active));
+        button.addEventListener("click", () => selectLang(val, label));
+        const text = document.createElement("span");
+        text.textContent = label;
+        const icon = document.createElement("span");
+        icon.className = "material-symbols-outlined fill-icon";
+        icon.style.fontSize = "20px";
+        icon.textContent = active ? "check_circle" : "radio_button_unchecked";
+        button.append(text, icon);
+        container.appendChild(button);
+      });
+    }
+
+    function selectLang(val, label) {
+      settings.language = val;
+      renderLangOptions();
+      const sel = document.getElementById("language-select");
+      if ([...sel.options].find(o => o.value === val)) sel.value = val;
+    }
+
+    function renderToneOptions() {
+      const tones = ["Motivational", "Islamic", "Funny", "Romantic", "Professional", "Poetic"];
+      const saved = settings.tone || "Islamic";
+      const container = document.getElementById("tone-options");
+      container.replaceChildren();
+      tones.forEach((tone) => {
+        const active = tone === saved;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.id = `tone-btn-${tone}`;
+        button.className = `flex justify-between items-center w-full min-h-[56px] px-4 rounded-xl border-2 transition-all font-semibold ${active ? "border-primary-container bg-primary-fixed text-primary" : "border-outline-variant text-on-surface hover:bg-surface-variant"}`;
+        button.setAttribute("aria-pressed", String(active));
+        button.addEventListener("click", () => selectTone(tone));
+        const text = document.createElement("span");
+        text.textContent = tone;
+        const icon = document.createElement("span");
+        icon.className = "material-symbols-outlined fill-icon";
+        icon.style.fontSize = "20px";
+        icon.textContent = active ? "check_circle" : "radio_button_unchecked";
+        button.append(text, icon);
+        container.appendChild(button);
+      });
+    }
+
+    function selectTone(val) {
+      settings.tone = val;
+      renderToneOptions();
+      const sel = document.getElementById("tone-select");
+      if ([...sel.options].find(o => o.value === val)) sel.value = val;
+    }
+
+    // ── NAVIGATION ──
+    function navigate(page) {
+      const validPages = ["home", "generate", "today", "history", "settings"];
+      if (!validPages.includes(page)) return;
+      localStorage.setItem("gm_page", page);
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.getElementById(`page-${page}`).classList.add("active");
+      document.querySelectorAll(".nav-item").forEach(n => {
+        n.classList.remove("active");
+        n.classList.add("text-on-surface-variant");
+      });
+      const active = document.getElementById(`nav-${page}`);
+      active.classList.add("active");
+      active.classList.remove("text-on-surface-variant");
+      window.scrollTo(0, 0);
+
+      // Load home content when navigating to home
+      if (page === 'home') {
+        if (!homeImagesLoaded) loadHomeImages();
+        loadCloudinaryHistory();
+      } else if (page === "history") {
+        loadCloudinaryHistory();
+      }
+    }
+
+    // ── HOME PAGE ──
+    let homeImagesLoaded = false;
+    let selectedHomeImageIndex = -1;
+    let homeImageDataUrls = [];
+    let homeImageMessages = [];
+
+    async function loadHomeImages() {
+      homeImagesLoaded = false;
+      selectedHomeImageIndex = -1;
+      homeImageDataUrls = [];
+
+      const loading = document.getElementById('home-img-loading');
+      const grid = document.getElementById('home-img-grid');
+      const error = document.getElementById('home-img-error');
+      const refreshBtn = document.getElementById('home-refresh-btn');
+
+      loading.classList.remove('hidden');
+      grid.classList.add('hidden');
+      error.classList.add('hidden');
+      refreshBtn.disabled = true;
+      refreshBtn.innerHTML = `<span class="material-symbols-outlined spinner" style="font-size:18px">refresh</span> Loading`;
+
+      try {
+        // Use user's saved language & tone; fall back to English/Motivational for new users
+        const lang = (settings && settings.language) || 'English';
+        const tone = (settings && settings.tone) || 'Motivational';
+        const res = await fetch(`${API_BASE}/home-images?language=${encodeURIComponent(lang)}&tone=${encodeURIComponent(tone)}`);
+        if (!res.ok) throw new Error('Failed');
+        const data = await res.json();
+        homeImageDataUrls = data.images || [];
+        homeImageMessages = data.messages || [];
+        renderHomeImageGrid();
+        homeImagesLoaded = true;
+        loading.classList.add('hidden');
+        grid.classList.remove('hidden');
+      } catch (err) {
+        loading.classList.add('hidden');
+        error.classList.remove('hidden');
+      }
+
+      refreshBtn.disabled = false;
+      refreshBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size:18px">refresh</span> Refresh`;
+    }
+
+    function renderHomeImageGrid() {
+      const container = document.getElementById('home-img-cards');
+      container.replaceChildren();
+      homeImageDataUrls.forEach((url, index) => {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.id = `home-card-${index}`;
+        card.className = "relative rounded-xl overflow-hidden cursor-pointer border-4 border-transparent transition-all active:scale-95 aspect-square";
+        card.setAttribute("aria-label", `Select morning card ${index + 1}`);
+        card.setAttribute("aria-pressed", "false");
+        card.addEventListener("click", () => selectHomeImage(index));
+
+        const image = document.createElement("img");
+        image.src = url;
+        image.alt = `Morning card ${index + 1}`;
+        image.className = "w-full h-full object-cover";
+        card.appendChild(image);
+
+        const check = document.createElement("span");
+        check.id = `home-card-check-${index}`;
+        check.className = "hidden absolute inset-0 bg-primary/30 flex items-center justify-center";
+        check.textContent = "check_circle";
+        check.classList.add("material-symbols-outlined", "fill-icon", "text-primary");
+        check.style.fontSize = "24px";
+        card.appendChild(check);
+        container.appendChild(card);
+      });
+    }
+
+    function selectHomeImage(index) {
+      // Remove selection from all
+      homeImageDataUrls.forEach((_, i) => {
+        const card = document.getElementById(`home-card-${i}`);
+        const check = document.getElementById(`home-card-check-${i}`);
+        if (card) {
+          card.style.borderColor = 'transparent';
+          card.style.boxShadow = '';
+          card.setAttribute("aria-pressed", "false");
+        }
+        if (check) check.classList.add('hidden');
+      });
+
+      selectedHomeImageIndex = index;
+
+      // Highlight selected card
+      const card = document.getElementById(`home-card-${index}`);
+      const check = document.getElementById(`home-card-check-${index}`);
+      if (card) {
+        card.style.borderColor = '#f2994a';
+        card.style.boxShadow = '0 0 0 2px #f2994a55';
+        card.setAttribute("aria-pressed", "true");
+      }
+      if (check) check.classList.remove('hidden');
+
+      // Enable share button
+      const shareBtn = document.getElementById('home-share-btn');
+      const label = document.getElementById('home-selected-label');
+      shareBtn.disabled = false;
+      shareBtn.classList.remove('opacity-50', 'pointer-events-none');
+      label.textContent = `Card ${index + 1} selected ✓`;
+    }
+
+    async function shareHomeImage() {
+      if (selectedHomeImageIndex < 0 || !homeImageDataUrls[selectedHomeImageIndex]) {
+        showToast('Please select a card first!', true);
+        return;
+      }
+      const imageUrl = homeImageDataUrls[selectedHomeImageIndex];
+      const message = homeImageMessages[selectedHomeImageIndex] || '';
+
+      if (navigator.share) {
+        try {
+          // Convert data URL to blob for file sharing
+          const res = await fetch(imageUrl);
+          const blob = await res.blob();
+          const file = new File([blob], `good-morning-${Date.now()}.jpg`, { type: blob.type });
+
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              title: 'Good Morning AI 🌅',
+              text: message,
+              files: [file]
+            });
+          } else {
+            // Fallback: share text only
+            await navigator.share({ title: 'Good Morning AI 🌅', text: message });
+          }
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            // Last resort: download
+            const a = document.createElement('a');
+            a.href = imageUrl;
+            a.download = `good-morning-${Date.now()}.jpg`;
+            a.click();
+            showToast('Card downloaded! ⬇️');
+          }
+        }
+      } else {
+        // No share API — download
+        const a = document.createElement('a');
+        a.href = imageUrl;
+        a.download = `good-morning-${Date.now()}.jpg`;
+        a.click();
+        showToast('Card downloaded! ⬇️');
+      }
+    }
+
+    async function loadCloudinaryHistory() {
+      const token = getToken();
+      if (!token) return;
+
+      try {
+        const res = await fetch(`${API_BASE}/cloudinary-history`, {
+          headers: authHeaders()
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        const images = data.images || [];
+        const grids = [
+          document.getElementById("home-history-grid"),
+          document.getElementById("history-cards-grid")
+        ];
+        document.getElementById("home-history-section").classList.toggle("hidden", images.length === 0);
+        grids.forEach((grid) => {
+          grid.replaceChildren();
+          images.forEach((image, index) => {
+            let imageUrl;
+            try {
+              imageUrl = new URL(image.url);
+              if (imageUrl.origin !== "https://res.cloudinary.com") return;
+            } catch {
+              return;
+            }
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "relative rounded-xl overflow-hidden aspect-square border-2 border-transparent hover:border-primary transition-all";
+            button.setAttribute("aria-label", `Share saved card ${index + 1}`);
+            button.addEventListener("click", () => shareCloudinaryImage(imageUrl.href));
+            const img = document.createElement("img");
+            img.src = imageUrl.href;
+            img.alt = `Saved greeting card ${index + 1}`;
+            img.className = "w-full h-full object-cover";
+            button.appendChild(img);
+            grid.appendChild(button);
+          });
+        });
+      } catch (err) {
+        console.error('Cloudinary history fetch failed:', err);
+      }
+    }
+
+    async function shareCloudinaryImage(imageUrl) {
+      if (navigator.share) {
+        try {
+          const res = await fetch(imageUrl);
+          const blob = await res.blob();
+          const file = new File([blob], `good-morning-${Date.now()}.jpg`, { type: blob.type });
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({ title: 'Good Morning AI 🌅', files: [file] });
+            return;
+          }
+        } catch (err) { /* fallthrough */ }
+        try {
+          await navigator.share({ title: 'Good Morning AI 🌅', url: imageUrl });
+        } catch (err) { /* fallthrough */ }
+      } else {
+        const a = document.createElement('a');
+        a.href = imageUrl;
+        a.download = `good-morning-${Date.now()}.jpg`;
+        a.click();
+        showToast('Card downloaded! ⬇️');
+      }
+    }
+
+    // ── TOAST ──
+    function showToast(msg, isError = false) {
+      const toast = document.getElementById("toast");
+      const icon = document.getElementById("toast-icon");
+      document.getElementById("toast-msg").textContent = msg;
+      icon.textContent = isError ? "error" : "check_circle";
+      icon.style.color = isError ? "#ba1a1a" : "#27AE60";
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+
+    // ── LOADING ──
+    function showLoading(text = "Please wait...") {
+      document.getElementById("loading-text").textContent = text;
+      document.getElementById("loading-overlay").classList.remove("hidden");
+      document.getElementById("loading-overlay").classList.add("flex");
+    }
+    function hideLoading() {
+      document.getElementById("loading-overlay").classList.add("hidden");
+      document.getElementById("loading-overlay").classList.remove("flex");
+    }
+
+    // ── GENERATE MESSAGE (streaming) ──
+    async function generateMessage() {
+      const language = document.getElementById("language-select").value;
+      const tone = document.getElementById("tone-select").value;
+      currentLanguage = language;
+      currentTone = tone;
+
+      const btn = document.getElementById("generate-btn");
+      btn.disabled = true;
+      btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full spinner"></div> Generating...`;
+
+      const result = document.getElementById("message-result");
+      const msgEl = document.getElementById("message-text");
+      result.classList.remove("hidden");
+      document.getElementById("image-result").classList.add("hidden");
+      msgEl.textContent = "";
+      msgEl.classList.add("cursor-blink");
+
+      const isRTL = ["Urdu", "Arabic"].includes(language);
+      const isHindi = language === "Hindi";
+      const isChinese = language === "Chinese";
+      msgEl.dir = isRTL ? "rtl" : "auto";
+      if (isRTL) { msgEl.style.fontFamily = "'Noto Nastaliq Urdu', serif"; }
+      else if (isHindi) { msgEl.style.fontFamily = "'Noto Sans Devanagari', sans-serif"; }
+      else if (isChinese) { msgEl.style.fontFamily = "'Noto Sans SC', sans-serif"; }
+      else { msgEl.style.fontFamily = "'Be Vietnam Pro', sans-serif"; }
+
+      try {
+        const response = await fetch(`${API_BASE}/generate`, {
+          method: "POST",
+          headers: authHeaders(),
+          body: JSON.stringify({ language, tone })
+        });
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || "Could not generate a greeting.");
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let frameBuffer = "";
+        let fullMessage = "";
+        const applyFrame = (frame) => {
+          const lines = frame.split("\n");
+          const eventName = lines.find((line) => line.startsWith("event:"))?.slice(6).trim();
+          const dataLine = lines.find((line) => line.startsWith("data:"))?.slice(5).trim();
+          if (!eventName || !dataLine) return;
+          const data = JSON.parse(dataLine);
+          if (eventName === "reset") fullMessage = "";
+          if (eventName === "replace") fullMessage = data.text || "";
+          if (eventName === "chunk") fullMessage += data.text || "";
+          msgEl.textContent = fullMessage;
+        };
+        while (true) {
+          const { done, value } = await reader.read();
+          frameBuffer += decoder.decode(value || new Uint8Array(), { stream: !done });
+          const frames = frameBuffer.split("\n\n");
+          frameBuffer = frames.pop() || "";
+          frames.forEach(applyFrame);
+          if (done) break;
+        }
+
+        msgEl.classList.remove("cursor-blink");
+        currentMessage = fullMessage.trim();
+        if (!currentMessage) throw new Error("The server returned an empty greeting.");
+        saveToHistory(currentMessage, language, tone);
+        updateTodayPage(currentMessage, language);
+      } catch (error) {
+        msgEl.classList.remove("cursor-blink");
+        msgEl.textContent = error.message || "Failed to generate a greeting.";
+        showToast(error.message || "Error generating message.", true);
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = `<span class="material-symbols-outlined fill-icon">auto_awesome</span>  Generate Morning Message`;
+    }
+
+    // ── GENERATE IMAGE ──
+    async function generateImage() {
+      if (!currentMessage) { showToast("Generate a message first!", true); return; }
+      const btn = document.getElementById("img-btn");
+      btn.disabled = true;
+      btn.innerHTML = `<div class="w-4 h-4 border-2 border-on-tertiary-container border-t-transparent rounded-full spinner"></div> Creating...`;
+      showLoading("Creating your image card...");
+
+      try {
+        const res = await fetch(`${API_BASE}/generate-image`, {
+          method: "POST",
+          headers: authHeaders(),
+          body: JSON.stringify({
+            greeting: currentMessage,
+            tone: currentTone || "Motivational",
+            style: settings.defaultCardStyle || "sunrise"
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Image generation failed.");
+        if (data.image) {
+          currentImageDataUrl = data.image;
+          const imgEl = document.getElementById("generated-image");
+          imgEl.src = data.image;
+          document.getElementById("image-result").classList.remove("hidden");
+
+          const todayWrap = document.getElementById("today-image-wrap");
+          todayWrap.replaceChildren();
+          const todayImg = document.createElement('img');
+          todayImg.src = data.image;
+          todayImg.className = 'w-full h-full object-cover';
+          todayImg.alt = 'Today\'s greeting card';
+          todayWrap.appendChild(todayImg);
+
+          showToast("Image card created! ✨");
+        } else {
+          throw new Error("The server returned no card image.");
+        }
+      } catch (err) {
+        showToast(err.message || "Image generation failed.", true);
+      } finally {
+        hideLoading();
+        btn.disabled = false;
+        btn.innerHTML = `<span class="material-symbols-outlined" style="font-size:20px">palette</span> Card`;
+      }
+    }
+
+    // ── COPY MESSAGE ──
+    function copyMessage() {
+      if (!currentMessage) { showToast("No message to copy", true); return; }
+      navigator.clipboard.writeText(currentMessage).then(() => showToast("Message copied! 📋"));
+    }
+
+    // ── SHARE MESSAGE ──
+    async function shareMessage() {
+      if (!currentMessage) { showToast("Generate a message first!", true); return; }
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: 'Good Morning AI', text: currentMessage });
+        } catch (err) {
+          console.error("Share failed", err);
+        }
+      } else {
+        copyMessage();
+        showToast("Copied to clipboard (Share not supported)");
+      }
+    }
+
+    // ── SHARE IMAGE CARD ──
+    async function shareImageCard() {
+      if (!currentImageDataUrl) { showToast("Generate an image first!", true); return; }
+      if (navigator.share) {
+        try {
+          const res = await fetch(currentImageDataUrl);
+          const blob = await res.blob();
+          const file = new File([blob], `good-morning-${Date.now()}.jpg`, { type: blob.type });
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({ title: 'Good Morning AI', files: [file] });
+          } else {
+            showToast("Image sharing not supported on this device.", true);
+          }
+        } catch (err) {
+          console.error("Share failed", err);
+        }
+      } else {
+        downloadImage();
+        showToast("Downloaded (Share not supported)");
+      }
+    }
+
+    // ── DOWNLOAD IMAGE ──
+    function downloadImage() {
+      if (!currentImageDataUrl) { showToast("Generate an image first!", true); return; }
+      const a = document.createElement("a");
+      a.href = currentImageDataUrl;
+      a.download = `good-morning-${Date.now()}.jpg`;
+      a.click();
+      showToast("Image saved! ⬇️");
+    }
+
+    // ── SUBSCRIBE NOTIFICATIONS ──
+    async function subscribeNotifications() {
+      if (settings.notifEnabled) {
+        try {
+          await unsubscribeNotifications();
+        } catch (error) {
+          showToast(error.message || "Could not disable notifications.", true);
+        }
+        return;
+      }
+      if (!getToken()) {
+        toggleAuthModals("login");
+        showToast("Sign in to enable notifications.", true);
+        return;
+      }
+      if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
+        showToast("Push notifications are not supported in this browser.", true);
+        return;
+      }
+      showLoading("Setting up notifications...");
+      try {
+        const vapidRes = await fetch(`${API_BASE}/vapid-public-key`);
+        if (!vapidRes.ok) throw new Error("Could not load notification settings.");
+        const { publicKey } = await vapidRes.json();
+        const reg = await navigator.serviceWorker.register("./sw.js");
+        const permission = await Notification.requestPermission();
+        if (permission !== "granted") {
+          settings.notifEnabled = false;
+          document.getElementById("notif-toggle").checked = false;
+          localStorage.setItem(getSettingsKey(), JSON.stringify(settings));
+          showToast("Notifications were not enabled because permission was denied.", true);
+          return;
+        }
+
+        let subscription = await reg.pushManager.getSubscription();
+        if (!subscription) {
+          subscription = await reg.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(publicKey)
+          });
+        }
+        const time = document.getElementById("time-input").value || settings.time || "04:00";
+        const response = await fetch(`${API_BASE}/subscribe`, {
+          method: "POST",
+          headers: authHeaders(),
+          body: JSON.stringify({
+            pushSubscription: subscription.toJSON(),
+            language: settings.language || "English",
+            tone: settings.tone || "Motivational",
+            time,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            enabled: true
+          })
+        });
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || "Could not save your notification schedule.");
+        }
+
+        settings.notifEnabled = true;
+        settings.time = time;
+        localStorage.setItem(getSettingsKey(), JSON.stringify(settings));
+        document.getElementById("notif-toggle").checked = true;
+        document.getElementById("notif-label").textContent = "Daily Notifications Enabled";
+        document.getElementById("notif-sub").style.display = "none";
+        document.getElementById("notif-arrow").style.display = "none";
+        showToast("Notifications enabled!");
+      } catch (err) {
+        showToast(err.message || "Failed to enable notifications.", true);
+        console.error(err);
+      } finally {
+        hideLoading();
+      }
+    }
+
+    async function unsubscribeNotifications(showMessage = true) {
+      const registration = await navigator.serviceWorker.ready;
+      const subscription = await registration.pushManager.getSubscription();
+      const response = await fetch(`${API_BASE}/unsubscribe`, {
+        method: "POST",
+        headers: authHeaders(),
+        body: JSON.stringify({ endpoint: subscription ? subscription.endpoint : undefined })
+      });
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Could not disable notifications.");
+      }
+      if (subscription) await subscription.unsubscribe();
+      settings.notifEnabled = false;
+      localStorage.setItem(getSettingsKey(), JSON.stringify(settings));
+      document.getElementById("notif-toggle").checked = false;
+      document.getElementById("notif-label").textContent = "Enable Daily Notification";
+      document.getElementById("notif-sub").style.display = "";
+      document.getElementById("notif-arrow").style.display = "";
+      if (showMessage) showToast("Daily notifications disabled.");
+    }
+
+    function urlBase64ToUint8Array(base64String) {
+      const padding = "=".repeat((4 - base64String.length % 4) % 4);
+      const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+      const rawData = window.atob(base64);
+      return Uint8Array.from([...rawData].map(c => c.charCodeAt(0)));
+    }
+
+    // ── SAVE PREFERENCES ──
+    async function savePreferences() {
+      const language = document.getElementById("language-select").value;
+      const tone = document.getElementById("tone-select").value;
+      const defaultCardStyle = document.getElementById("card-style-select").value;
+      settings.language = language;
+      settings.tone = tone;
+      settings.defaultCardStyle = defaultCardStyle;
+      localStorage.setItem(getSettingsKey(), JSON.stringify(settings));
+
+      renderLangOptions();
+      renderToneOptions();
+
+      if (!getToken()) {
+        toggleAuthModals("login");
+        showToast("Sign in to sync your preferences.", true);
+        return;
+      }
+      showLoading("Saving preferences...");
+      try {
+        const response = await fetch(`${API_BASE}/save`, {
+          method: "POST",
+          headers: authHeaders(),
+          body: JSON.stringify({ language, tone, defaultCardStyle })
+        });
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || "Preferences could not be saved.");
+        }
+        showToast("Preferences saved!");
+      } catch (error) {
+        showToast(error.message || "Preferences could not be saved.", true);
+      }
+      hideLoading();
+    }
+
+    // ── SAVE SETTINGS PAGE ──
+    async function saveSettings() {
+      const language = settings.language || "English";
+      const tone = settings.tone || "Motivational";
+      const time = document.getElementById("time-input").value || "04:00";
+      const defaultCardStyle = document.getElementById("card-style-select").value;
+      const notificationRequested = document.getElementById("notif-toggle").checked;
+      const wasEnabled = settings.notifEnabled;
+      settings.time = time;
+      settings.defaultCardStyle = defaultCardStyle;
+      settings.language = language;
+      settings.tone = tone;
+      try {
+        if (!getToken()) {
+          toggleAuthModals("login");
+          throw new Error("Sign in to save your settings.");
+        }
+        if (notificationRequested && !wasEnabled) {
+          await subscribeNotifications();
+          if (!settings.notifEnabled) return;
+        } else if (!notificationRequested && wasEnabled) {
+          await unsubscribeNotifications(false);
+        } else if (notificationRequested && wasEnabled) {
+          const registration = await navigator.serviceWorker.ready;
+          const subscription = await registration.pushManager.getSubscription();
+          if (!subscription) throw new Error("The browser notification subscription is missing. Enable notifications again.");
+          const response = await fetch(`${API_BASE}/subscribe`, {
+            method: "POST",
+            headers: authHeaders(),
+            body: JSON.stringify({
+              pushSubscription: subscription.toJSON(),
+              time,
+              timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+              language,
+              tone,
+              enabled: true
+            })
+          });
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || "Notification schedule could not be updated.");
+          }
+        }
+
+        const response = await fetch(`${API_BASE}/save`, {
+          method: "POST",
+          headers: authHeaders(),
+          body: JSON.stringify({ language, tone, defaultCardStyle })
+        });
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || "Settings could not be saved.");
+        }
+        settings.language = language;
+        settings.tone = tone;
+        localStorage.setItem(getSettingsKey(), JSON.stringify(settings));
+        const languageSelect = document.getElementById("language-select");
+        if ([...languageSelect.options].some((option) => option.value === language)) languageSelect.value = language;
+        showToast("Settings saved!");
+      } catch (error) {
+        if (!settings.notifEnabled) document.getElementById("notif-toggle").checked = false;
+        showToast(error.message || "Settings could not be saved.", true);
+      } finally {
+        hideLoading();
+      }
+    }
+
+    // ── HISTORY ──
+    function saveToHistory(message, language, tone) {
+      const entry = {
+        id: Date.now(),
+        message,
+        language,
+        tone,
+        date: new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })
+      };
+      messageHistory.unshift(entry);
+      if (messageHistory.length > 20) messageHistory.pop();
+      localStorage.setItem(getHistoryKey(), JSON.stringify(messageHistory));
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const container = document.getElementById("history-list");
+      container.replaceChildren();
+      if (messageHistory.length === 0) {
+        const empty = document.createElement("p");
+        empty.className = "bg-white rounded-2xl p-5 border border-black/5 ambient-shadow text-center text-on-surface-variant";
+        empty.textContent = "No messages yet. Generate your first one!";
+        container.appendChild(empty);
+        return;
+      }
+      messageHistory.forEach((entry) => {
+        const card = document.createElement("article");
+        card.className = "bg-white rounded-2xl p-5 border border-black/5 ambient-shadow space-y-3";
+        const header = document.createElement("div");
+        header.className = "flex justify-between items-center gap-2";
+        const date = document.createElement("span");
+        date.className = "text-xs text-on-surface-variant font-semibold";
+        date.textContent = entry.date;
+        const tags = document.createElement("div");
+        tags.className = "flex gap-2";
+        for (const [label, className] of [
+          [entry.language, "bg-secondary-container text-on-secondary-container"],
+          [entry.tone, "bg-primary-fixed text-primary"]
+        ]) {
+          const tag = document.createElement("span");
+          tag.className = `${className} text-xs px-2 py-1 rounded-full font-semibold`;
+          tag.textContent = label;
+          tags.appendChild(tag);
+        }
+        header.append(date, tags);
+
+        const message = document.createElement("p");
+        message.className = "text-lg leading-relaxed text-on-surface";
+        message.dir = ["Urdu", "Arabic"].includes(entry.language) ? "rtl" : "auto";
+        message.textContent = entry.message;
+        if (["Urdu", "Arabic"].includes(entry.language)) message.style.fontFamily = "'Noto Nastaliq Urdu', serif";
+
+        const actions = document.createElement("div");
+        actions.className = "flex gap-3 pt-1";
+        const reuse = document.createElement("button");
+        reuse.type = "button";
+        reuse.className = "text-primary font-semibold text-sm hover:underline";
+        reuse.textContent = "Use Again";
+        reuse.addEventListener("click", () => reuseMessage(entry.id));
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "text-error font-semibold text-sm hover:underline ml-auto";
+        remove.textContent = "Delete";
+        remove.addEventListener("click", () => deleteHistory(entry.id));
+        actions.append(reuse, remove);
+        card.append(header, message, actions);
+        container.appendChild(card);
+      });
+    }
+
+    function reuseMessage(id) {
+      const entry = messageHistory.find(e => String(e.id) === String(id));
+      if (!entry) return;
+      currentMessage = entry.message;
+      currentTone = entry.tone;
+      currentLanguage = entry.language;
+      document.getElementById("language-select").value = entry.language;
+      document.getElementById("tone-select").value = entry.tone;
+      const msgEl = document.getElementById("message-text");
+      msgEl.textContent = entry.message;
+      const isRTL = ["Urdu", "Arabic"].includes(entry.language);
+      msgEl.dir = isRTL ? "rtl" : "auto";
+      document.getElementById("message-result").classList.remove("hidden");
+      document.getElementById("image-result").classList.add("hidden");
+      navigate("generate");
+      showToast("Message loaded from history! ✨");
+    }
+
+    function deleteHistory(id) {
+      messageHistory = messageHistory.filter(e => String(e.id) !== String(id));
+      localStorage.setItem(getHistoryKey(), JSON.stringify(messageHistory));
+      renderHistory();
+      showToast("Deleted");
+    }
+
+    // ── TODAY PAGE ──
+    function updateTodayPage(message, language) {
+      document.getElementById("today-message-en").textContent = message;
+      const isUrdu = language === "Urdu";
+      const urduSection = document.getElementById("today-urdu-section");
+      if (isUrdu) {
+        urduSection.style.display = "block";
+        document.getElementById("today-message-ur").textContent = message;
+        document.getElementById("today-message-en").style.display = "none";
+      } else {
+        urduSection.style.display = "none";
+        document.getElementById("today-message-en").style.display = "block";
+      }
+      document.getElementById("today-title").textContent = "Today's Message";
+    }
+
+    async function shareToday() {
+      const msg = document.getElementById("today-message-en").textContent;
+      if (!msg || msg.includes("Tap")) { showToast("Generate a message first!", true); return; }
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: 'Good Morning AI', text: msg });
+        } catch (err) { }
+      } else {
+        copyToday();
+        showToast("Copied to clipboard");
+      }
+    }
+
+    function copyToday() {
+      const msg = document.getElementById("today-message-en").textContent;
+      if (!msg || msg.includes("Tap")) { showToast("No message yet!", true); return; }
+      navigator.clipboard.writeText(msg).then(() => showToast("Copied! 📋"));
+    }
+
+    function downloadTodayImage() {
+      if (!currentImageDataUrl) { showToast("Generate an image card first!", true); return; }
+      downloadImage();
+    }
+
+    // ── AUTH FUNCTIONS ──
+    function clearAuthErrors() {
+      const se = document.getElementById("signup-error");
+      const le = document.getElementById("login-error");
+      const re = document.getElementById("reset-error");
+      if (se) { se.textContent = ""; se.classList.add("hidden"); }
+      if (le) { le.textContent = ""; le.classList.add("hidden"); }
+      if (re) { re.textContent = ""; re.classList.add("hidden"); }
+    }
+
+    function toggleAuthModals(target) {
+      clearAuthErrors();
+      const signupModal = document.getElementById("signup-modal");
+      const loginModal = document.getElementById("login-modal");
+      const resetModal = document.getElementById("reset-modal");
+
+      signupModal.classList.add("hidden");
+      signupModal.classList.remove("flex");
+      loginModal.classList.add("hidden");
+      loginModal.classList.remove("flex");
+      if (resetModal) {
+        resetModal.classList.add("hidden");
+        resetModal.classList.remove("flex");
+      }
+
+      if (target === 'login') {
+        loginModal.classList.remove("hidden");
+        loginModal.classList.add("flex");
+      } else if (target === 'reset') {
+        if (resetModal) {
+          document.getElementById("forgot-form").classList.toggle("hidden", Boolean(resetToken));
+          document.getElementById("reset-form").classList.toggle("hidden", !resetToken);
+          resetModal.classList.remove("hidden");
+          resetModal.classList.add("flex");
+        }
+      } else {
+        signupModal.classList.remove("hidden");
+        signupModal.classList.add("flex");
+      }
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      clearAuthErrors();
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value;
+      const btn = document.getElementById("login-btn");
+      const errBox = document.getElementById("login-error");
+      
+      btn.disabled = true;
+      btn.textContent = "Logging in...";
+      try {
+        const res = await fetch(`${API_BASE}/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          saveSession(data);
+          loadHistoryData();
+          loadSettingsData();
+          renderHistory();
+          renderLangOptions();
+          renderToneOptions();
+          loadSettings();
+          document.getElementById("login-modal").classList.add("hidden");
+          document.getElementById("login-modal").classList.remove("flex");
+          document.getElementById("login-form").reset();
+          loadCloudinaryHistory();
+          showToast("Welcome back, " + data.user.name + "!");
+        } else {
+          const errMsg = data.error || "Login failed. Please check your credentials.";
+          if (errBox) {
+            errBox.textContent = errMsg;
+            errBox.classList.remove("hidden");
+          }
+          showToast(errMsg, true);
+        }
+      } catch (err) {
+        const errMsg = err.message || "Unable to connect to server. Please check your connection.";
+        if (errBox) {
+          errBox.textContent = errMsg;
+          errBox.classList.remove("hidden");
+        }
+        showToast(errMsg, true);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Log In";
+      }
+    }
+
+    async function handleSignup(e) {
+      e.preventDefault();
+      clearAuthErrors();
+      const name = document.getElementById("signup-name").value.trim();
+      const email = document.getElementById("signup-email").value.trim();
+      const password = document.getElementById("signup-password").value;
+      const btn = document.getElementById("signup-btn");
+      const errBox = document.getElementById("signup-error");
+
+      if (password.length < 8) {
+        const errMsg = "Password must be at least 8 characters.";
+        if (errBox) {
+          errBox.textContent = errMsg;
+          errBox.classList.remove("hidden");
+        }
+        showToast(errMsg, true);
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Signing up...";
+      try {
+        const res = await fetch(`${API_BASE}/signup`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, password })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          saveSession(data);
+          loadHistoryData();
+          loadSettingsData();
+          renderHistory();
+          renderLangOptions();
+          renderToneOptions();
+          loadSettings();
+          document.getElementById("signup-modal").classList.add("hidden");
+          document.getElementById("signup-modal").classList.remove("flex");
+          document.getElementById("signup-form").reset();
+          loadCloudinaryHistory();
+          showToast("Welcome, " + name + "!");
+        } else {
+          const errMsg = data.error || "Sign up failed. Please try again.";
+          if (errBox) {
+            errBox.textContent = errMsg;
+            errBox.classList.remove("hidden");
+          }
+          showToast(errMsg, true);
+        }
+      } catch (err) {
+        const errMsg = err.message || "Unable to connect to server. Please check your connection.";
+        if (errBox) {
+          errBox.textContent = errMsg;
+          errBox.classList.remove("hidden");
+        }
+        showToast(errMsg, true);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Sign Up";
+      }
+    }
+
+    async function handleForgotPassword(e) {
+      e.preventDefault();
+      clearAuthErrors();
+      const email = document.getElementById("forgot-email").value.trim();
+      const btn = document.getElementById("forgot-btn");
+      const errBox = document.getElementById("reset-error");
+      btn.disabled = true;
+      try {
+        const response = await fetch(`${API_BASE}/forgot-password`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Could not request a reset link.");
+        showToast(data.message || "Check your email for a reset link.");
+      } catch (error) {
+        errBox.textContent = error.message || "Could not request a reset link.";
+        errBox.classList.remove("hidden");
+        showToast(errBox.textContent, true);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function handleResetPassword(e) {
+      e.preventDefault();
+      clearAuthErrors();
+      const password = document.getElementById("reset-password").value;
+      const btn = document.getElementById("reset-btn");
+      const errBox = document.getElementById("reset-error");
+      if (!resetToken) {
+        errBox.textContent = "This reset link is invalid or expired.";
+        errBox.classList.remove("hidden");
+        return;
+      }
+      btn.disabled = true;
+      try {
+        const res = await fetch(`${API_BASE}/reset-password`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token: resetToken, password })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Password reset failed.");
+        saveSession(data);
+        resetToken = "";
+        loadHistoryData();
+        loadSettingsData();
+        renderHistory();
+        renderLangOptions();
+        renderToneOptions();
+        loadSettings();
+        document.getElementById("reset-modal").classList.add("hidden");
+        document.getElementById("reset-modal").classList.remove("flex");
+        document.getElementById("reset-form").reset();
+        window.history.replaceState({}, document.title, window.location.pathname);
+        showToast("Password updated. Welcome back, " + data.user.name + "!");
+      } catch (error) {
+        errBox.textContent = error.message || "Password reset failed.";
+        errBox.classList.remove("hidden");
+        showToast(errBox.textContent, true);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    function toggleProfile() {
+      const userStr = localStorage.getItem("gm_user");
+      if (!userStr) {
+        document.getElementById("signup-modal").classList.remove("hidden");
+        document.getElementById("signup-modal").classList.add("flex");
+        return;
+      }
+      const user = JSON.parse(userStr);
+      document.getElementById("profile-name").textContent = user.name;
+      document.getElementById("profile-email").textContent = user.email;
+
+      document.getElementById("profile-modal").classList.remove("hidden");
+      document.getElementById("profile-modal").classList.add("flex");
+    }
+
+    function closeProfileModal() {
+      document.getElementById("profile-modal").classList.add("hidden");
+      document.getElementById("profile-modal").classList.remove("flex");
+    }
+
+    async function logout() {
+      try {
+        await fetch(`${API_BASE}/logout`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({})
+        });
+      } catch (error) {
+        console.warn("Server logout failed:", error.message);
+      }
+      accessToken = null;
+      localStorage.removeItem("gm_user");
+      loadHistoryData();
+      loadSettingsData();
+      renderHistory();
+      renderLangOptions();
+      renderToneOptions();
+      loadSettings();
+      closeProfileModal();
+      document.getElementById("signup-form").reset();
+      document.getElementById("login-form").reset();
+      document.getElementById("login-modal").classList.remove("hidden");
+      document.getElementById("login-modal").classList.add("flex");
+    }
+
+    async function deleteAccount() {
+      if (!getToken() || !window.confirm("Permanently delete your account, notification subscriptions, and saved cards?")) return;
+      const user = JSON.parse(localStorage.getItem("gm_user") || "{}");
+      try {
+        const response = await fetch(`${API_BASE}/account`, {
+          method: "DELETE",
+          headers: authHeaders(),
+          body: JSON.stringify({})
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Account deletion failed.");
+        if (user.email) {
+          localStorage.removeItem(`gm_history_${user.email}`);
+          localStorage.removeItem(`gm_settings_${user.email}`);
+        }
+        accessToken = null;
+        localStorage.removeItem("gm_user");
+        closeProfileModal();
+        toggleAuthModals("signup");
+        showToast("Your account and saved data were deleted.");
+      } catch (error) {
+        showToast(error.message || "Account deletion failed.", true);
+      }
+    }
+  </script>
+</body>
+
+</html>
